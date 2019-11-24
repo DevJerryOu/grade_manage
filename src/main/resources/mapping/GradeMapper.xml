@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.grade.mapper.GradeMapper" >
+  <resultMap id="BaseResultMap" type="com.management.grade.model.Grade" >
+    <id column="selected_class_id" property="selectedClassId" jdbcType="INTEGER" />
+    <result column="daily_grade" property="dailyGrade" jdbcType="DECIMAL" />
+    <result column="final_grade" property="finalGrade" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    selected_class_id, daily_grade, final_grade, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from grade
+    where selected_class_id = #{selectedClassId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from grade
+    where selected_class_id = #{selectedClassId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.grade.model.Grade" >
+    insert into grade (selected_class_id, daily_grade, final_grade, 
+      status)
+    values (#{selectedClassId,jdbcType=INTEGER}, #{dailyGrade,jdbcType=DECIMAL}, #{finalGrade,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.grade.model.Grade" >
+    insert into grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectedClassId != null" >
+        selected_class_id,
+      </if>
+      <if test="dailyGrade != null" >
+        daily_grade,
+      </if>
+      <if test="finalGrade != null" >
+        final_grade,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectedClassId != null" >
+        #{selectedClassId,jdbcType=INTEGER},
+      </if>
+      <if test="dailyGrade != null" >
+        #{dailyGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="finalGrade != null" >
+        #{finalGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.grade.model.Grade" >
+    update grade
+    <set >
+      <if test="dailyGrade != null" >
+        daily_grade = #{dailyGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="finalGrade != null" >
+        final_grade = #{finalGrade,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where selected_class_id = #{selectedClassId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.grade.model.Grade" >
+    update grade
+    set daily_grade = #{dailyGrade,jdbcType=DECIMAL},
+      final_grade = #{finalGrade,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER}
+    where selected_class_id = #{selectedClassId,jdbcType=INTEGER}
+  </update>
+</mapper>

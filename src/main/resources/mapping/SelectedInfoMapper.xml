@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.grade.mapper.SelectedInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.management.grade.model.SelectedInfo" >
+    <id column="selected_id" property="selectedId" jdbcType="INTEGER" />
+    <result column="select_user_id" property="selectUserId" jdbcType="INTEGER" />
+    <result column="select_class_id" property="selectClassId" jdbcType="INTEGER" />
+    <result column="select_teacher_id" property="selectTeacherId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    selected_id, select_user_id, select_class_id, select_teacher_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from selected_info
+    where selected_id = #{selectedId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from selected_info
+    where selected_id = #{selectedId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.grade.model.SelectedInfo" >
+    insert into selected_info (selected_id, select_user_id, select_class_id, 
+      select_teacher_id)
+    values (#{selectedId,jdbcType=INTEGER}, #{selectUserId,jdbcType=INTEGER}, #{selectClassId,jdbcType=INTEGER}, 
+      #{selectTeacherId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.grade.model.SelectedInfo" >
+    insert into selected_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectedId != null" >
+        selected_id,
+      </if>
+      <if test="selectUserId != null" >
+        select_user_id,
+      </if>
+      <if test="selectClassId != null" >
+        select_class_id,
+      </if>
+      <if test="selectTeacherId != null" >
+        select_teacher_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectedId != null" >
+        #{selectedId,jdbcType=INTEGER},
+      </if>
+      <if test="selectUserId != null" >
+        #{selectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="selectClassId != null" >
+        #{selectClassId,jdbcType=INTEGER},
+      </if>
+      <if test="selectTeacherId != null" >
+        #{selectTeacherId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.grade.model.SelectedInfo" >
+    update selected_info
+    <set >
+      <if test="selectUserId != null" >
+        select_user_id = #{selectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="selectClassId != null" >
+        select_class_id = #{selectClassId,jdbcType=INTEGER},
+      </if>
+      <if test="selectTeacherId != null" >
+        select_teacher_id = #{selectTeacherId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where selected_id = #{selectedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.grade.model.SelectedInfo" >
+    update selected_info
+    set select_user_id = #{selectUserId,jdbcType=INTEGER},
+      select_class_id = #{selectClassId,jdbcType=INTEGER},
+      select_teacher_id = #{selectTeacherId,jdbcType=INTEGER}
+    where selected_id = #{selectedId,jdbcType=INTEGER}
+  </update>
+</mapper>

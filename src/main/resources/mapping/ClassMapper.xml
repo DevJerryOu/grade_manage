@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.management.grade.mapper.ClassMapper" >
+  <resultMap id="BaseResultMap" type="com.management.grade.model.Class" >
+    <id column="class_id" property="classId" jdbcType="INTEGER" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="class_teacher_id" property="classTeacherId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    class_id, class_name, class_teacher_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from class
+    where class_id = #{classId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from class
+    where class_id = #{classId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.management.grade.model.Class" >
+    insert into class (class_id, class_name, class_teacher_id
+      )
+    values (#{classId,jdbcType=INTEGER}, #{className,jdbcType=VARCHAR}, #{classTeacherId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.management.grade.model.Class" >
+    insert into class
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="classTeacherId != null" >
+        class_teacher_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classTeacherId != null" >
+        #{classTeacherId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.management.grade.model.Class" >
+    update class
+    <set >
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="classTeacherId != null" >
+        class_teacher_id = #{classTeacherId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where class_id = #{classId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.management.grade.model.Class" >
+    update class
+    set class_name = #{className,jdbcType=VARCHAR},
+      class_teacher_id = #{classTeacherId,jdbcType=INTEGER}
+    where class_id = #{classId,jdbcType=INTEGER}
+  </update>
+</mapper>
