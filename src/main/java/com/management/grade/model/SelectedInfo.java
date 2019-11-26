@@ -1,7 +1,7 @@
 package com.management.grade.model;
 
 public class SelectedInfo {
-    private Integer selectedId;
+    private Integer selectedId; // 此Id是SelectInfo本身的标识,用于区分不同的Select关系
 
     private Integer selectUserId;
 
