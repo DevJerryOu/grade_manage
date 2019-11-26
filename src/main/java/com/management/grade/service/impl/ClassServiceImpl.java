@@ -4,6 +4,9 @@ import com.management.grade.mapper.GradeMapper;
 import com.management.grade.model.Class;
 import com.management.grade.service.ClassService;
 import com.management.grade.mapper.ClassMapper;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Service
 public class ClassServiceImpl implements ClassService {

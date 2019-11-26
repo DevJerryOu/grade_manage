@@ -3,7 +3,9 @@ package com.management.grade.service.impl;
 import com.management.grade.mapper.GradeMapper;
 import com.management.grade.service.GradeService;
 import com.management.grade.model.Grade;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 
 @Service
 public class GradeServiceImpl implements GradeService{
