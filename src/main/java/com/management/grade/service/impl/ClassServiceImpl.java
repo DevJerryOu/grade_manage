@@ -7,6 +7,7 @@ import com.management.grade.mapper.ClassMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+// 怎么又不能提交pr了?加一行注释看看
 
 @Service
 public class ClassServiceImpl implements ClassService {
